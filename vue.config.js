@@ -1,13 +1,12 @@
-
 module.exports={
   lintOnSave: false,
   publicPath:'./',
-  // devServer:{
-  //   proxy: {
-  //     "/api": {
-  //       target: "http://121.5.235.28:8888",
-  //       // pathRewrite: {"^/api" : ""}
-  //     }
-  //   }
-  // }
+  devServer:{
+    proxy: {
+      "/api": {
+        target: "http://127.0.0.1:8888",
+        // pathRewrite: {"^/api" : ""}
+      }
+    }
+  }
 }
