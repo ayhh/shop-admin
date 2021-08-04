@@ -1,6 +1,6 @@
 <template>
   <el-container class="home-container">
-    <el-header height="100px">
+    <el-header height="80px">
       <div class="logo_info">
         <img src="@/assets/images/y15.jpg" alt="logo" />
         <span>Mall management system</span>
@@ -15,21 +15,37 @@
           active-text-color="#409eff"
           unique-opened
           router
+          :default-active="activePath"
         >
-          <el-submenu :index="item.id+''" v-for="(item) in menuList" :key="item.id">
+          <!-- 一级菜单 -->
+          <el-submenu
+            :index="item.id + ''"
+            v-for="item in menuList"
+            :key="item.id"
+          >
             <template slot="title">
+              <!-- 设置图标 -->
               <i :class="iconsObj[item.id]"></i>
-              <span>{{item.authName}}</span>
+              <span>{{ item.authName }}</span>
             </template>
-              <el-menu-item :index="'/'+i.path" v-for="i in item.children" :key="i.id">
+            <!-- 二级菜单 -->
+            <!-- 利用i.path设置路由路径 -->
+            <el-menu-item
+              :index="'/' + i.path"
+              v-for="i in item.children"
+              :key="i.id"
+              @click="saveActivity('/' + i.path)"
+            >
+              <template slot="title">
                 <i class="el-icon-menu"></i>
-                {{i.authName}}
-              </el-menu-item>
+                {{ i.authName }}
+              </template>
+            </el-menu-item>
           </el-submenu>
         </el-menu>
       </el-aside>
       <el-main>
-        <router-view/>
+        <router-view />
       </el-main>
     </el-container>
   </el-container>
@@ -37,39 +53,45 @@
 
 <script>
 // @ is an alias to /src
-import { reqBannerList, getMenu } from "@/api";
+import { getMenu } from '@/api';
 export default {
-  data() {
-    return{
+  data () {
+    return {
       menuList: [],
-      iconsObj:{
-        '125': 'iconfont icon-user',
-        '103': 'iconfont icon-tijikongjian',
-        '101': 'iconfont icon-shangpin',
-        '102': 'iconfont icon-danju',
-        '145': 'iconfont icon-baobiao'
-      }
+      iconsObj: {
+        125: 'iconfont icon-user',
+        103: 'iconfont icon-tijikongjian',
+        101: 'iconfont icon-shangpin',
+        102: 'iconfont icon-danju',
+        145: 'iconfont icon-baobiao',
+      },
+      activePath: ''
     }
   },
   methods: {
-    logout() {
-      window.sessionStorage.clear();
-      this.$router.push("/login");
-      this.$message("退出成功");
+    logout () {
+      window.sessionStorage.clear()
+      this.$router.push('/login')
+      this.$message('退出成功')
     },
-    async getMenuList() {
+    async getMenuList () {
       // const data = await this.$http.post('/abi/good')
-      const res = await getMenu();
+      const res = await getMenu()
       // console.log(data);
-      if(res.meta.status !== 200) return this.$message('获取导航栏失败')
+      if (res.meta.status !== 200) return this.$message('获取导航栏失败')
       this.menuList = res.data
     },
+    saveActivity (activePath) {
+      window.sessionStorage.setItem('activePath',activePath)
+      this.activePath = activePath
+    }
   },
-  created() {
-    this.getMenuList()
+  created () {
+    this.getMenuList(),
+    this.activePath = window.sessionStorage.getItem('activePath')
   },
   components: {},
-};
+}
 </script>
 <style lang="less" scoped>
 .home-container {
@@ -85,21 +107,21 @@ export default {
     justify-content: center;
     align-items: center;
     img {
-      width: 150px;
-      height: 70px;
+      width: 110px;
+      height: 50px;
     }
     span {
       color: white;
-      font-size: 35px;
+      font-size: 30px;
       margin-left: 30px;
-      font-family:'Times New Roman', Times, serif;
+      font-family: 'Times New Roman', Times, serif;
     }
   }
 }
 
 .el-aside {
   background-color: #3a3d46;
-  .el-menu{
+  .el-menu {
     border-right: none;
   }
   .iconfont {

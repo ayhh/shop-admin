@@ -48,3 +48,48 @@ export const reqBannerList = (good_id) => {
   })
 }
 
+export const getUsers = (queryInfo) => {
+  return request ({
+    url:'/private/v1/users',
+    method: 'get',
+    params: queryInfo
+  })
+}
+
+export const changeUserState = (id, state) => {
+  return request({
+    url:`/private/v1/users/${id}/state/${state}`,
+    method:'put'
+    // data: good_id
+  })
+}
+
+export const addUser = (userInfo) => {
+  return request({
+    url:`/private/v1/users`,
+    method:'post',
+    data: userInfo
+  })
+}
+
+export const getUserInfo = (id) => {
+  return request ({
+    url:`/private/v1/users/${id}`,
+    method: 'get'
+  })
+}
+
+export const editUserInfo = (id, userInfo) => {
+  return request({
+    url: `/private/v1/users/${id}`,
+    method: 'put',
+    data: userInfo
+  })
+}
+
+export const deleUser = (id) => {
+  return request({
+    url: `/private/v1/users/${id}`,
+    method: 'delete'
+  })
+}

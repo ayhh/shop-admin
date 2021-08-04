@@ -2,7 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue'
 import Login from '@/views/Login.vue'
-import Welcome from '@/views/Welcome.vue';
+import Welcome from '@/views/Welcome.vue'
+import Users from '@/views/users/Users.vue';
 
 Vue.use(VueRouter)
 
@@ -22,6 +23,10 @@ const routes = [{
       {
         path: '/welcome',
         component: Welcome
+      },
+      {
+        path: '/users',
+        component: Users
       }
     ]
   }
@@ -31,6 +36,7 @@ const router = new VueRouter({
   routes
 })
 
+//路由守卫
 router.beforeEach((to, from, next) => {
   if (to.path === '/login') return next()
   const token = window.sessionStorage.getItem('token')
