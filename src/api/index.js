@@ -4,7 +4,7 @@
 // 三种参数   params参数  query参数  请求体参数
 // params参数 是在url当中携带的,属于路径一部分
 // query参数，可以在url当中携带 ？分割，后面就是query参数
-              // 也可以在配置对象当中配置，配置的属性名叫params
+// 也可以在配置对象当中配置，配置的属性名叫params
 // 请求体参数，在配置对象当中data里面配置，请求方式是put和post才有请求体参数
 
 // axios({
@@ -27,30 +27,30 @@ import mockAjax from '@/api/mockAjax'
 //无参
 
 export const postLogin = (loginForm) => {
-  return request ({
-    url:'/private/v1/login',
+  return request({
+    url: '/private/v1/login',
     method: 'post',
     data: loginForm
   })
 }
 export const getMenu = () => {
-  return request ({
-    url:'/private/v1/menus',
+  return request({
+    url: '/private/v1/menus',
     method: 'get'
   })
 }
 
 export const reqBannerList = (good_id) => {
   return request({
-    url:`/good/${good_id}`,
-    method:'post'
+    url: `/good/${good_id}`,
+    method: 'post'
     // data: good_id
   })
 }
 
 export const getUsers = (queryInfo) => {
-  return request ({
-    url:'/private/v1/users',
+  return request({
+    url: '/private/v1/users',
     method: 'get',
     params: queryInfo
   })
@@ -58,23 +58,23 @@ export const getUsers = (queryInfo) => {
 
 export const changeUserState = (id, state) => {
   return request({
-    url:`/private/v1/users/${id}/state/${state}`,
-    method:'put'
+    url: `/private/v1/users/${id}/state/${state}`,
+    method: 'put'
     // data: good_id
   })
 }
 
 export const addUser = (userInfo) => {
   return request({
-    url:`/private/v1/users`,
-    method:'post',
+    url: `/private/v1/users`,
+    method: 'post',
     data: userInfo
   })
 }
 
 export const getUserInfo = (id) => {
-  return request ({
-    url:`/private/v1/users/${id}`,
+  return request({
+    url: `/private/v1/users/${id}`,
     method: 'get'
   })
 }
@@ -91,5 +91,48 @@ export const deleUser = (id) => {
   return request({
     url: `/private/v1/users/${id}`,
     method: 'delete'
+  })
+}
+export const getRoles = () => {
+  return request({
+    url: '/private/v1/roles',
+    method: 'get'
+  })
+}
+
+export const removeRoleTag = (roleId, rightId) => {
+  return request({
+    url: `/private/v1/roles/${roleId}/rights/${rightId}`,
+    method: 'delete'
+  })
+}
+
+export const getRight = () => {
+  return request({
+    url: `/private/v1/rights/tree`,
+    method: 'get'
+  })
+}
+
+export const  setUserPower = (id, idstr) => {
+  return request({
+    url: `/private/v1/roles/${id}/rights`,
+    method: 'post',
+    data: idstr
+  })
+}
+
+export const setRole = () => {
+  return request({
+    url: `/private/v1/roles`,
+    method: 'get',
+  })
+}
+
+export const saveRoleInfo = (id, rId) => {
+  return request({
+    url: `/private/v1/users/${id}/role`,
+    method: 'put',
+    data: rId
   })
 }
