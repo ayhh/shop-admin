@@ -136,3 +136,27 @@ export const saveRoleInfo = (id, rId) => {
     data: rId
   })
 }
+
+export const getCategoriesList = (queryinfo) => {
+  return request({
+    url: '/private/v1/categories',
+    method: 'get',
+    params: queryinfo
+  })
+}
+
+export const getCateList = (queryinfo) => {
+  return request({
+    url: '/private/v1/categories',
+    method: 'get',
+    params: queryinfo
+  })
+}
+
+export const addCategories = (queryinfo) => {
+  return request({
+    url: '/private/v1/categories',
+    method: 'post',
+    data: queryinfo
+  })
+}
