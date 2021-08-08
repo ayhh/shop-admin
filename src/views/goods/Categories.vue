@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>商品管理</el-breadcrumb-item>
       <el-breadcrumb-item>商品列表</el-breadcrumb-item>
     </el-breadcrumb>
@@ -41,7 +41,7 @@
           >
           <el-tag v-else type="warning" size="mini">三级</el-tag>
         </template>
-        <template slot="opt" slot-scope="scope">
+        <template slot="opt">
           <el-button icon="el-icon-edit" type="warning" size="mini"></el-button>
           <el-button
             icon="el-icon-delete"
@@ -174,14 +174,14 @@ export default {
       this.queryInfo.pagenum = newVaule
       this.getCateList()
     },
-    // 如果用户没有选择，那么作为父级分类
-    // 父级分类是0，如果不进行监视，不选择的参数将是undefind
     async showAddCartDialog () {
       const res = await getCateList({ type: 2 })
       // console.log(res)
       this.parentCateList = res.data
       this.addCartDialogVisible = true
     },
+    // 如果用户没有选择，那么作为父级分类
+    // 父级分类是0，如果不进行监视，不选择的参数将是undefind
     // id是商品的id属性，level是商品的分类等级:0，1，2
     parentCateChanged () {
       // console.log(this.selectKeys);

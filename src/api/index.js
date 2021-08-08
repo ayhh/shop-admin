@@ -160,3 +160,18 @@ export const addCategories = (queryinfo) => {
     data: queryinfo
   })
 }
+
+export const goodsList = (queryinfo) => {
+  return request({
+    url: '/private/v1/goods',
+    method: 'get',
+    params: queryinfo
+  })
+}
+
+export const deleGoods = (id) => {
+  return request({
+    url: `/private/v1/goods/${id}`,
+    method: 'delete'
+  })
+}
