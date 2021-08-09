@@ -114,7 +114,7 @@ export const getRight = () => {
   })
 }
 
-export const  setUserPower = (id, idstr) => {
+export const setUserPower = (id, idstr) => {
   return request({
     url: `/private/v1/roles/${id}/rights`,
     method: 'post',
@@ -173,5 +173,13 @@ export const deleGoods = (id) => {
   return request({
     url: `/private/v1/goods/${id}`,
     method: 'delete'
+  })
+}
+
+export const cateAttributes = (id, queryinfo) => {
+  return request({
+    url: `/private/v1/categories/${id}/attributes`,
+    method: 'get',
+    params: queryinfo
   })
 }
